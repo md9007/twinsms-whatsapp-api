@@ -1,187 +1,654 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Twinsms | Login</title>
-<style>
+<title>Twinsms | Login</title><style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;font-family:Arial,sans-serif;
-  background:#f1f7f4;color:#18382c;
-  min-height:100vh;display:flex;align-items:center;
-  justify-content:center;padding:20px
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f7f4;
+  color:#18382c;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px
 }
-.wrapper{width:100%;max-width:430px}
-.brand{text-align:center;margin-bottom:24px}
-.logo{font-size:34px;font-weight:800;color:#087f5b}
-.logo span{color:#d6a12b}
-.brand p{color:#71847a;margin:8px 0}
+
+.wrapper{
+  width:100%;
+  max-width:430px
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:24px
+}
+
+.logo{
+  font-size:34px;
+  font-weight:800;
+  color:#087f5b
+}
+
+.logo span{
+  color:#d6a12b
+}
+
+.brand p{
+  color:#71847a;
+  margin:8px 0
+}
+
 .card{
-  background:white;border:1px solid #e0ebe4;
-  border-radius:20px;padding:28px;
+  background:white;
+  border:1px solid #e0ebe4;
+  border-radius:20px;
+  padding:28px;
   box-shadow:0 12px 40px #174a3210
 }
-.tabs{display:flex;background:#edf4ef;padding:5px;
-  border-radius:10px;margin-bottom:24px}
+
+.tabs{
+  display:flex;
+  background:#edf4ef;
+  padding:5px;
+  border-radius:10px;
+  margin-bottom:24px
+}
+
 .tabs button{
-  flex:1;border:0;padding:12px;border-radius:8px;
-  background:transparent;color:#64766c;font-weight:bold
+  flex:1;
+  border:0;
+  padding:12px;
+  border-radius:8px;
+  background:transparent;
+  color:#64766c;
+  font-weight:bold
 }
-.tabs button.active{background:white;color:#087f5b;
-  box-shadow:0 2px 7px #0000000b}
-h1{font-size:25px;margin:0 0 8px}
-.subtitle{color:#71847a;font-size:14px;line-height:1.5;
-  margin:0 0 24px}
-label{display:block;font-size:13px;font-weight:bold;
-  margin:16px 0 8px}
+
+.tabs button.active{
+  background:white;
+  color:#087f5b;
+  box-shadow:0 2px 7px #0000000b
+}
+
+h1{
+  font-size:25px;
+  margin:0 0 8px
+}
+
+.subtitle{
+  color:#71847a;
+  font-size:14px;
+  line-height:1.5;
+  margin:0 0 24px
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin:16px 0 8px
+}
+
 input{
-  width:100%;padding:13px;border:1px solid #dce6df;
-  border-radius:9px;font-size:15px;outline:none;
-  background:white;color:#18382c
+  width:100%;
+  padding:13px;
+  border:1px solid #dce6df;
+  border-radius:9px;
+  font-size:15px;
+  outline:none;
+  background:white;
+  color:#18382c
 }
-input:focus{border-color:#087f5b;
-  box-shadow:0 0 0 3px #087f5b15}
-.password{display:flex;gap:8px}
-.password input{min-width:0}
-.password button{border:1px solid #dce6df;
-  background:white;border-radius:9px;padding:0 11px}
+
+input:focus{
+  border-color:#087f5b;
+  box-shadow:0 0 0 3px #087f5b15
+}
+
+.password{
+  display:flex;
+  gap:8px
+}
+
+.password input{
+  min-width:0
+}
+
+.password button{
+  border:1px solid #dce6df;
+  background:white;
+  border-radius:9px;
+  padding:0 11px
+}
+
 .submit{
-  width:100%;margin-top:23px;padding:14px;
-  border:0;border-radius:9px;background:#087f5b;
-  color:white;font-size:15px;font-weight:bold
+  width:100%;
+  margin-top:23px;
+  padding:14px;
+  border:0;
+  border-radius:9px;
+  background:#087f5b;
+  color:white;
+  font-size:15px;
+  font-weight:bold
 }
-.submit:active{opacity:.85}
-.message{font-size:13px;line-height:1.5;
-  margin-top:15px;color:#087f5b}
-.note{text-align:center;font-size:12px;color:#71847a;
-  line-height:1.6;margin-top:20px}
-.hidden{display:none}
-</style>
-</head>
-<body>
-<div class="wrapper">
-  <div class="brand">
+
+.submit:disabled{
+  opacity:.6
+}
+
+.submit:active{
+  opacity:.85
+}
+
+.message{
+  font-size:13px;
+  line-height:1.5;
+  margin-top:15px
+}
+
+.note{
+  text-align:center;
+  font-size:12px;
+  color:#71847a;
+  line-height:1.6;
+  margin-top:20px
+}
+
+.hidden{
+  display:none
+}
+</style></head><body><div class="wrapper">  <div class="brand">
     <div class="logo">Twin<span>PE</span> SMS</div>
     <p>WhatsApp Messaging Workspace</p>
-  </div>
+  </div>  <div class="card"><div class="tabs">
+  <button id="loginTab" class="active" type="button">
+    Login
+  </button>
 
-  <div class="card">
-    <div class="tabs">
-      <button id="loginTab" class="active" type="button">Login</button>
-      <button id="registerTab" type="button">Register</button>
-    </div>
-
-    <h1 id="heading">Welcome back</h1>
-    <p class="subtitle" id="subtitle">
-      Sign in to access your Twinsms dashboard.
-    </p>
-
-    <form id="authForm">
-      <div id="nameField" class="hidden">
-        <label for="fullName">Full name</label>
-        <input id="fullName" type="text"
-          placeholder="Enter your name" autocomplete="name">
-      </div>
-
-      <label for="email">Email address</label>
-      <input id="email" type="email" required
-        placeholder="you@example.com" autocomplete="email">
-
-      <label for="password">Password</label>
-      <div class="password">
-        <input id="password" type="password" required
-          minlength="8" placeholder="At least 8 characters"
-          autocomplete="current-password">
-        <button id="showPassword" type="button">Show</button>
-      </div>
-
-      <div id="confirmField" class="hidden">
-        <label for="confirmPassword">Confirm password</label>
-        <input id="confirmPassword" type="password"
-          minlength="8" placeholder="Repeat your password"
-          autocomplete="new-password">
-      </div>
-
-      <button class="submit" id="submitButton" type="submit">
-        Login
-      </button>
-      <div id="message" class="message" role="status"></div>
-    </form>
-  </div>
-
-  <div class="note">
-    Secure account access requires a connected authentication service.<br>
-    © 2026 Twinsms
-  </div>
+  <button id="registerTab" type="button">
+    Register
+  </button>
 </div>
 
-<script>
+<h1 id="heading">Welcome back</h1>
+
+<p class="subtitle" id="subtitle">
+  Sign in to access your Twinsms dashboard.
+</p>
+
+<form id="authForm">
+
+  <div id="nameField" class="hidden">
+
+    <label for="fullName">
+      Full name
+    </label>
+
+    <input
+      id="fullName"
+      type="text"
+      placeholder="Enter your name"
+      autocomplete="name"
+    >
+
+  </div>
+
+  <label for="email">
+    Email address
+  </label>
+
+  <input
+    id="email"
+    type="email"
+    required
+    placeholder="you@example.com"
+    autocomplete="email"
+  >
+
+  <label for="password">
+    Password
+  </label>
+
+  <div class="password">
+
+    <input
+      id="password"
+      type="password"
+      required
+      minlength="8"
+      placeholder="At least 8 characters"
+      autocomplete="current-password"
+    >
+
+    <button id="showPassword" type="button">
+      Show
+    </button>
+
+  </div>
+
+  <div id="confirmField" class="hidden">
+
+    <label for="confirmPassword">
+      Confirm password
+    </label>
+
+    <input
+      id="confirmPassword"
+      type="password"
+      minlength="8"
+      placeholder="Repeat your password"
+      autocomplete="new-password"
+    >
+
+  </div>
+
+  <button
+    class="submit"
+    id="submitButton"
+    type="submit"
+  >
+    Login
+  </button>
+
+  <div
+    id="message"
+    class="message"
+    role="status"
+  ></div>
+
+</form>
+
+  </div>  <div class="note">
+    Secure account access powered by Firebase.<br>
+    © 2026 Twinsms
+  </div></div><!-- Firebase SDK --><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script>
+
+/* =========================================
+   FIREBASE CONFIGURATION
+========================================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAii3qIMmVXYRPC_EhkPy5c7JeBvCdU8jI",
+  authDomain: "twinsms.firebaseapp.com",
+  projectId: "twinsms",
+  storageBucket: "twinsms.firebasestorage.app",
+  messagingSenderId: "205131467973",
+  appId: "1:205131467973:web:7cdbc3dcc42049d8cc74ac",
+  measurementId: "G-M6V43EXL7M"
+};
+
+
+/* Initialize Firebase */
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
 let mode = 'login';
 
-const loginTab = document.getElementById('loginTab');
-const registerTab = document.getElementById('registerTab');
-const heading = document.getElementById('heading');
-const subtitle = document.getElementById('subtitle');
-const nameField = document.getElementById('nameField');
-const confirmField = document.getElementById('confirmField');
-const fullName = document.getElementById('fullName');
-const confirmPassword = document.getElementById('confirmPassword');
-const password = document.getElementById('password');
-const submitButton = document.getElementById('submitButton');
-const message = document.getElementById('message');
-const authForm = document.getElementById('authForm');
+const loginTab =
+  document.getElementById('loginTab');
+
+const registerTab =
+  document.getElementById('registerTab');
+
+const heading =
+  document.getElementById('heading');
+
+const subtitle =
+  document.getElementById('subtitle');
+
+const nameField =
+  document.getElementById('nameField');
+
+const confirmField =
+  document.getElementById('confirmField');
+
+const fullName =
+  document.getElementById('fullName');
+
+const confirmPassword =
+  document.getElementById('confirmPassword');
+
+const password =
+  document.getElementById('password');
+
+const email =
+  document.getElementById('email');
+
+const submitButton =
+  document.getElementById('submitButton');
+
+const message =
+  document.getElementById('message');
+
+const authForm =
+  document.getElementById('authForm');
+
+
+/* =========================================
+   MESSAGE FUNCTION
+========================================= */
+
+function showMessage(text, type = 'success') {
+
+  message.textContent = text;
+
+  if (type === 'error') {
+    message.style.color = '#dc2626';
+  } else {
+    message.style.color = '#087f5b';
+  }
+}
+
+
+/* =========================================
+   LOGIN / REGISTER MODE
+========================================= */
 
 function setMode(nextMode) {
+
   mode = nextMode;
+
   const registering = mode === 'register';
 
-  loginTab.classList.toggle('active', !registering);
-  registerTab.classList.toggle('active', registering);
-  nameField.classList.toggle('hidden', !registering);
-  confirmField.classList.toggle('hidden', !registering);
+  loginTab.classList.toggle(
+    'active',
+    !registering
+  );
+
+  registerTab.classList.toggle(
+    'active',
+    registering
+  );
+
+  nameField.classList.toggle(
+    'hidden',
+    !registering
+  );
+
+  confirmField.classList.toggle(
+    'hidden',
+    !registering
+  );
 
   fullName.required = registering;
-  confirmPassword.required = registering;
-  password.autocomplete = registering
-    ? 'new-password' : 'current-password';
 
-  heading.textContent = registering
-    ? 'Create your account' : 'Welcome back';
-  subtitle.textContent = registering
-    ? 'Register to get started with Twinsms.'
-    : 'Sign in to access your Twinsms dashboard.';
-  submitButton.textContent = registering
-    ? 'Create account' : 'Login';
+  confirmPassword.required = registering;
+
+  password.autocomplete =
+    registering
+      ? 'new-password'
+      : 'current-password';
+
+  heading.textContent =
+    registering
+      ? 'Create your account'
+      : 'Welcome back';
+
+  subtitle.textContent =
+    registering
+      ? 'Register to get started with Twinsms.'
+      : 'Sign in to access your Twinsms dashboard.';
+
+  submitButton.textContent =
+    registering
+      ? 'Create account'
+      : 'Login';
+
   message.textContent = '';
 }
 
-loginTab.addEventListener('click', () => setMode('login'));
-registerTab.addEventListener('click', () => setMode('register'));
 
-document.getElementById('showPassword').addEventListener('click', () => {
-  const visible = password.type === 'text';
-  password.type = visible ? 'password' : 'text';
-  document.getElementById('showPassword').textContent =
-    visible ? 'Show' : 'Hide';
-});
+/* Tabs */
 
-authForm.addEventListener('submit', event => {
-  event.preventDefault();
-  message.style.color = '#b45309';
+loginTab.addEventListener(
+  'click',
+  () => setMode('login')
+);
 
-  if (mode === 'register' &&
-      password.value !== confirmPassword.value) {
-    message.textContent = 'Passwords do not match.';
-    return;
+registerTab.addEventListener(
+  'click',
+  () => setMode('register')
+);
+
+
+/* =========================================
+   SHOW / HIDE PASSWORD
+========================================= */
+
+document
+  .getElementById('showPassword')
+  .addEventListener('click', () => {
+
+    const visible =
+      password.type === 'text';
+
+    password.type =
+      visible
+        ? 'password'
+        : 'text';
+
+    document
+      .getElementById('showPassword')
+      .textContent =
+        visible
+          ? 'Show'
+          : 'Hide';
+
+  });
+
+
+/* =========================================
+   FIREBASE ERROR MESSAGE
+========================================= */
+
+function firebaseError(error) {
+
+  switch (error.code) {
+
+    case 'auth/email-already-in-use':
+      return 'This email is already registered. Please login.';
+
+    case 'auth/invalid-email':
+      return 'Please enter a valid email address.';
+
+    case 'auth/weak-password':
+      return 'Password must be at least 6 characters.';
+
+    case 'auth/user-not-found':
+      return 'No account found with this email.';
+
+    case 'auth/wrong-password':
+      return 'Incorrect password.';
+
+    case 'auth/invalid-credential':
+      return 'Invalid email or password.';
+
+    case 'auth/too-many-requests':
+      return 'Too many attempts. Please try again later.';
+
+    case 'auth/network-request-failed':
+      return 'Network error. Please check your internet connection.';
+
+    default:
+      return error.message || 'Something went wrong.';
   }
+}
 
-  message.textContent = mode === 'register'
-    ? 'Demo only: connect an authentication backend to create an account.'
-    : 'Demo only: connect an authentication backend to sign in.';
-});
-</script>
-</body>
+
+/* =========================================
+   LOGIN / REGISTER
+========================================= */
+
+authForm.addEventListener(
+  'submit',
+  async (event) => {
+
+    event.preventDefault();
+
+    showMessage('');
+
+    submitButton.disabled = true;
+
+    const userEmail =
+      email.value.trim();
+
+    const userPassword =
+      password.value;
+
+    try {
+
+      /* =========================
+         REGISTER
+      ========================= */
+
+      if (mode === 'register') {
+
+        if (
+          userPassword !==
+          confirmPassword.value
+        ) {
+
+          showMessage(
+            'Passwords do not match.',
+            'error'
+          );
+
+          submitButton.disabled = false;
+
+          return;
+        }
+
+
+        if (userPassword.length < 8) {
+
+          showMessage(
+            'Password must be at least 8 characters.',
+            'error'
+          );
+
+          submitButton.disabled = false;
+
+          return;
+        }
+
+
+        const userCredential =
+          await auth.createUserWithEmailAndPassword(
+            userEmail,
+            userPassword
+          );
+
+
+        /* Save full name */
+
+        await userCredential.user.updateProfile({
+          displayName:
+            fullName.value.trim()
+        });
+
+
+        showMessage(
+          'Account created successfully!'
+        );
+
+
+        authForm.reset();
+
+        setMode('login');
+
+      }
+
+
+      /* =========================
+         LOGIN
+      ========================= */
+
+      else {
+
+        await auth.signInWithEmailAndPassword(
+          userEmail,
+          userPassword
+        );
+
+
+        showMessage(
+          'Login successful!'
+        );
+
+
+        /*
+         * এখানে আপনার Dashboard-এর URL
+         * পরে বসাতে পারবেন।
+         *
+         * উদাহরণ:
+         *
+         * window.location.href =
+         * 'dashboard.html';
+         */
+
+      }
+
+    }
+
+    catch (error) {
+
+      console.error(
+        'Firebase Auth Error:',
+        error
+      );
+
+      showMessage(
+        firebaseError(error),
+        'error'
+      );
+
+    }
+
+    finally {
+
+      submitButton.disabled = false;
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+auth.onAuthStateChanged(
+  (user) => {
+
+    if (user) {
+
+      console.log(
+        'Logged in user:',
+        user.email
+      );
+
+      console.log(
+        'User name:',
+        user.displayName
+      );
+
+    }
+
+  }
+);
+
+</script></body>
 </html>
-
