@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twin SMS | Dashboard</title><style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f7f4;
+  color:#18382c;
+  min-height:100vh;
+}
+
+.header{
+  background:white;
+  border-bottom:1px solid #e0ebe4;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:800;
+  color:#087f5b;
+}
+
+.logo span{
+  color:#d6a12b;
+}
+
+.logout{
+  border:1px solid #dce6df;
+  background:white;
+  color:#087f5b;
+  padding:9px 14px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.container{
+  width:100%;
+  max-width:1000px;
+  margin:auto;
+  padding:25px 18px;
+}
+
+.welcome{
+  background:white;
+  border:1px solid #e0ebe4;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 8px 30px #174a3210;
+}
+
+.welcome h1{
+  margin:0 0 8px;
+  font-size:26px;
+}
+
+.welcome p{
+  margin:0;
+  color:#71847a;
+  line-height:1.5;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin-top:18px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e0ebe4;
+  border-radius:16px;
+  padding:22px;
+}
+
+.card h3{
+  margin:0 0 10px;
+  color:#087f5b;
+}
+
+.card p{
+  color:#71847a;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.status{
+  display:inline-block;
+  margin-top:5px;
+  padding:6px 10px;
+  border-radius:20px;
+  background:#e7f7ef;
+  color:#087f5b;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.email{
+  word-break:break-all;
+  font-weight:bold;
+}
+
+.footer{
+  text-align:center;
+  color:#71847a;
+  font-size:12px;
+  padding:30px 10px;
+}
+</style></head><body><header class="header">  <div class="logo">
+    Twin<span> SMS</span>
+  </div>  <button class="logout" id="logoutButton">
+    Logout
+  </button></header><main class="container">  <section class="welcome"><h1>
+  Welcome to Twin SMS
+</h1>
+
+<p>
+  Your WhatsApp Messaging Workspace
+</p>
+
+<div class="status">
+  ● Account Active
+</div>
+
+  </section>  <section class="cards"><div class="card">
+  <h3>👤 Account</h3>
+
+  <p>
+    Logged in as:
+  </p>
+
+  <div class="email" id="userEmail">
+    Loading...
+  </div>
+</div>
+
+
+<div class="card">
+  <h3>📱 WhatsApp SMS</h3>
+
+  <p>
+    Your WhatsApp messaging workspace will appear here.
+  </p>
+
+  <span class="status">
+    Ready
+  </span>
+</div>
+
+
+<div class="card">
+  <h3>📊 Messages</h3>
+
+  <p>
+    Message statistics and sending tools will be added here.
+  </p>
+
+  <span class="status">
+    Coming soon
+  </span>
+</div>
+
+  </section></main><div class="footer">
+  © 2026 Twin SMS
+</div><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAii3qIMmVXYRPC_EhkPy5c7JeBvCdU8jI",
+  authDomain: "twinsms.firebaseapp.com",
+  projectId: "twinsms",
+  storageBucket: "twinsms.firebasestorage.app",
+  messagingSenderId: "205131467973",
+  appId: "1:205131467973:web:7cdbc3dcc42049d8cc74ac",
+  measurementId: "G-M6V43EXL7M"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const userEmail =
+  document.getElementById('userEmail');
+
+const logoutButton =
+  document.getElementById('logoutButton');
+
+
+/* Check login */
+
+auth.onAuthStateChanged((user) => {
+
+  if (user) {
+
+    userEmail.textContent =
+      user.email;
+
+  } else {
+
+    window.location.href =
+      'index.html';
+
+  }
+
+});
+
+
+/* Logout */
+
+logoutButton.addEventListener('click', async () => {
+
+  try {
+
+    await auth.signOut();
+
+    window.location.href =
+      'index.html';
+
+  } catch (error) {
+
+    alert(
+      'Logout failed: ' +
+      error.message
+    );
+
+  }
+
+});
+
+</script></body>
+</html>
