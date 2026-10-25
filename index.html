@@ -1,85 +1,423 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Twinsms WhatsApp API</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f3f7f5;
-      color: #172b24;
-    }
-    header {
-      background: #075e45;
-      color: white;
-      padding: 24px 16px;
-      text-align: center;
-    }
-    header h1 { margin: 0 0 8px; }
-    main {
-      max-width: 760px;
-      margin: 24px auto;
-      padding: 16px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      margin-bottom: 16px;
-      border-radius: 14px;
-      box-shadow: 0 3px 14px #0000000d;
-    }
-    .button {
-      display: inline-block;
-      padding: 12px 18px;
-      background: #087f5b;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      border: 0;
-      font-size: 16px;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #52645b;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twinsms | WhatsApp API Dashboard</title>
+<style>
+:root {
+  --green:#087f5b;
+  --dark:#123b30;
+  --bg:#f4f7f6;
+  --muted:#708078;
+  --border:#e5ece8;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:#20342d;
+}
+button { cursor:pointer; font:inherit; }
+.layout { min-height:100vh; }
+.sidebar {
+  position:fixed;
+  inset:0 auto 0 0;
+  width:245px;
+  background:#fff;
+  border-right:1px solid var(--border);
+  padding:24px 16px;
+  z-index:10;
+  transition:transform .25s;
+}
+.brand {
+  font-size:23px;
+  font-weight:800;
+  color:var(--green);
+  padding:8px 10px 26px;
+}
+.brand span { color:#d49a25; }
+.menu-label {
+  font-size:11px;
+  color:#8b9992;
+  font-weight:bold;
+  padding:12px 12px 8px;
+  letter-spacing:1px;
+}
+.nav {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:transparent;
+  text-align:left;
+  color:#52645c;
+  margin:3px 0;
+}
+.nav.active,.nav:hover {
+  background:#e8f6ef;
+  color:var(--green);
+  font-weight:bold;
+}
+.side-note {
+  margin:25px 5px;
+  padding:14px;
+  background:#f0f8f3;
+  border-radius:12px;
+  font-size:12px;
+  line-height:1.6;
+}
+.main {
+  margin-left:245px;
+  padding:25px 30px;
+  max-width:1600px;
+}
+.topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:28px;
+}
+.top-left { display:flex; align-items:center; gap:12px; }
+.menu-toggle {
+  display:none;
+  border:1px solid var(--border);
+  background:white;
+  padding:10px;
+  border-radius:9px;
+}
+.eyebrow { color:var(--muted); font-size:13px; }
+h1 { font-size:27px; margin:5px 0; }
+.profile {
+  background:white;
+  border:1px solid var(--border);
+  padding:10px 13px;
+  border-radius:12px;
+  font-weight:bold;
+}
+.welcome {
+  background:linear-gradient(120deg,#075b43,#11936a);
+  color:white;
+  border-radius:18px;
+  padding:25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:22px;
+}
+.welcome h2 { margin:0 0 10px; font-size:24px; }
+.welcome p { margin:0; line-height:1.6; color:#e2fff0; }
+.btn {
+  display:inline-block;
+  border:0;
+  border-radius:9px;
+  padding:12px 15px;
+  background:var(--green);
+  color:white;
+  font-weight:bold;
+}
+.btn-light { background:white; color:var(--green); }
+.stats {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  margin-bottom:22px;
+}
+.card {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:19px;
+  min-width:0;
+}
+.stat-icon { font-size:24px; }
+.stat-label { color:var(--muted); font-size:13px; margin-top:15px; }
+.stat-value { font-size:27px; font-weight:800; margin:8px 0; }
+.stat-foot { font-size:12px; color:var(--muted); }
+.section-grid {
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:18px;
+  margin-bottom:22px;
+}
+.card h3 { margin:0 0 17px; font-size:17px; }
+.status-row {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.status-icon {
+  background:#e8f7ef;
+  padding:13px;
+  border-radius:12px;
+  font-size:23px;
+}
+.status-dot {
+  display:inline-block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#e2a12b;
+  margin-right:5px;
+}
+.quick-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.quick {
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  text-align:left;
+  color:#20342d;
+}
+.quick:hover { border-color:var(--green); background:#f7fcf9; }
+.quick strong { display:block; margin:9px 0 5px; }
+.quick small { color:var(--muted); line-height:1.5; }
+.table-wrap { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th,td {
+  text-align:left;
+  padding:13px 10px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+th { color:var(--muted); font-weight:600; }
+.badge {
+  background:#fff3d9;
+  color:#946200;
+  padding:5px 8px;
+  border-radius:20px;
+  font-size:11px;
+}
+.page-message { color:var(--muted); line-height:1.7; }
+footer { padding:25px 5px; text-align:center; color:var(--muted); font-size:12px; }
+.overlay { display:none; }
+
+@media(max-width:1050px) {
+  .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .section-grid { grid-template-columns:1fr; }
+}
+@media(max-width:700px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .overlay.show {
+    display:block;
+    position:fixed;
+    inset:0;
+    background:#0007;
+    z-index:9;
+  }
+  .main { margin-left:0; padding:17px 13px; }
+  .menu-toggle { display:block; }
+  .topbar { margin-bottom:20px; }
+  h1 { font-size:21px; }
+  .profile { padding:9px; font-size:12px; }
+  .welcome { padding:20px 17px; align-items:flex-start; flex-direction:column; }
+  .welcome h2 { font-size:21px; }
+  .stats { gap:10px; }
+  .card { padding:14px; }
+  .stat-value { font-size:23px; }
+  .stat-label { font-size:12px; }
+  .quick-grid { gap:9px; }
+  .quick { padding:12px; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Twinsms WhatsApp API</h1>
-    <p>WhatsApp Messaging Automation Platform</p>
-  </header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">Twin<span>PE</span> SMS</div>
 
-  <main>
-    <section class="card">
-      <h2>স্বাগতম Twinsms-এ</h2>
-      <p>আপনার messaging dashboard এক জায়গায় পরিচালনা করুন।</p>
-      <a class="button" href="#features">Get Started</a>
+    <div class="menu-label">MAIN MENU</div>
+    <button class="nav active" data-page="Dashboard">🏠 Dashboard</button>
+    <button class="nav" data-page="WhatsApp Connection">📱 WhatsApp Connection</button>
+    <button class="nav" data-page="Bulk Messaging">📤 Bulk Messaging</button>
+    <button class="nav" data-page="Scheduled Messages">🗓️ Scheduled Messages</button>
+    <button class="nav" data-page="Auto Reply">💬 Auto Reply</button>
+
+    <div class="menu-label">MANAGEMENT</div>
+    <button class="nav" data-page="Contacts">👥 Contacts</button>
+    <button class="nav" data-page="Message History">📋 Message History</button>
+    <button class="nav" data-page="Settings">⚙️ Settings</button>
+
+    <div class="side-note">
+      <strong>Twinsms Starter</strong><br>
+      Dashboard demo version<br>
+      Backend not connected
+    </div>
+  </aside>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+        <div>
+          <div class="eyebrow">Twinsms / Workspace</div>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+      </div>
+      <div class="profile">👤 Admin ▾</div>
+    </header>
+
+    <section id="dashboardContent">
+      <div class="welcome">
+        <div>
+          <h2>Welcome to Twinsms 👋</h2>
+          <p>আপনার WhatsApp messaging workspace-এ স্বাগতম।<br>
+          এখান থেকে আপনার messaging tools পরিচালনা করুন।</p>
+        </div>
+        <button class="btn btn-light" data-go="WhatsApp Connection">Connect WhatsApp →</button>
+      </div>
+
+      <div class="stats">
+        <div class="card">
+          <div class="stat-icon">📨</div>
+          <div class="stat-label">Total Messages</div>
+          <div class="stat-value">0</div>
+          <div class="stat-foot">ডেমো ডেটা</div>
+        </div>
+        <div class="card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-label">Delivered</div>
+          <div class="stat-value">0</div>
+          <div class="stat-foot">কোনো live data নেই</div>
+        </div>
+        <div class="card">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-label">Scheduled</div>
+          <div class="stat-value">0</div>
+          <div class="stat-foot">কোনো schedule নেই</div>
+        </div>
+        <div class="card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-label">Contacts</div>
+          <div class="stat-value">0</div>
+          <div class="stat-foot">কোনো contacts যোগ হয়নি</div>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <section class="card">
+          <h3>WhatsApp Connection</h3>
+          <div class="status-row">
+            <div class="status-icon">📱</div>
+            <div>
+              <strong>WhatsApp Account</strong>
+              <p class="page-message"><span class="status-dot"></span>Not connected</p>
+            </div>
+          </div>
+          <p class="page-message">বাস্তব account connection-এর জন্য নিরাপদ backend ও অনুমোদিত API প্রয়োজন।</p>
+          <button class="btn" data-go="WhatsApp Connection">View Connection</button>
+        </section>
+
+        <section class="card">
+          <h3>Quick Actions</h3>
+          <div class="quick-grid">
+            <button class="quick" data-go="Bulk Messaging">
+              <span>📤</span><strong>Bulk Message</strong>
+              <small>সম্মতিপ্রাপ্ত contacts</small>
+            </button>
+            <button class="quick" data-go="Scheduled Messages">
+              <span>🗓️</span><strong>Schedule</strong>
+              <small>বার্তা পরিকল্পনা</small>
+            </button>
+            <button class="quick" data-go="Auto Reply">
+              <span>💬</span><strong>Auto Reply</strong>
+              <small>Reply rules</small>
+            </button>
+            <button class="quick" data-go="Contacts">
+              <span>👥</span><strong>Contacts</strong>
+              <small>Contact management</small>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <section class="card">
+        <h3>Recent Activity</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Activity</th><th>Status</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td>Dashboard created</td><td><span class="badge">Demo</span></td><td>Frontend only</td></tr>
+              <tr><td>WhatsApp connection</td><td><span class="badge">Pending</span></td><td>API not connected</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </section>
 
-    <section class="card" id="features">
-      <h2>আমাদের ফিচার</h2>
-      <p>📩 Bulk Messaging — সম্মতিপ্রাপ্ত গ্রাহকদের জন্য</p>
-      <p>🗓️ Scheduled Messaging</p>
-      <p>💬 Auto Reply</p>
-      <p>🔗 WhatsApp Account Connection</p>
-      <p><small>এগুলো আপাতত ডেমো ফিচার; কার্যকর করতে backend/API লাগবে।</small></p>
+    <section class="card" id="otherPage" hidden>
+      <h3 id="otherTitle"></h3>
+      <p class="page-message" id="otherDescription"></p>
+      <p class="page-message">এই পেজটি বর্তমানে UI demo। বাস্তব কাজের জন্য backend/API integration প্রয়োজন।</p>
+      <button class="btn" id="backDashboard">← Back to Dashboard</button>
     </section>
 
-    <section class="card">
-      <h2>শুরু করুন</h2>
-      <p>WhatsApp integration ও dashboard শিগগিরই যুক্ত হবে।</p>
-      <a class="button"
-         href="https://www.whatsapp.com/business/platform/">
-         WhatsApp Platform
-      </a>
-    </section>
+    <footer>© 2026 Twinsms · WhatsApp API Dashboard Demo</footer>
   </main>
+</div>
 
-  <footer>© 2026 Twinsms. All rights reserved.</footer>
+<script>
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const title = document.getElementById('pageTitle');
+const dashboard = document.getElementById('dashboardContent');
+const otherPage = document.getElementById('otherPage');
+const otherTitle = document.getElementById('otherTitle');
+const otherDescription = document.getElementById('otherDescription');
+
+const descriptions = {
+  'WhatsApp Connection':'এখানে account connection status ও integration নির্দেশনা থাকবে।',
+  'Bulk Messaging':'এখানে সম্মতি দেওয়া contacts-এর messaging campaign তৈরি করা যাবে।',
+  'Scheduled Messages':'এখানে বার্তার সময় ও তারিখ নির্ধারণের ব্যবস্থা থাকবে।',
+  'Auto Reply':'এখানে অনুমোদিত incoming messages-এর জন্য reply rules থাকবে।',
+  'Contacts':'এখানে contacts পরিচালনা ও opt-in status রাখার ব্যবস্থা থাকবে।',
+  'Message History':'এখানে message logs ও delivery status দেখা যাবে।',
+  'Settings':'এখানে profile ও application settings থাকবে।'
+};
+
+function openPage(page) {
+  title.textContent = page;
+  dashboard.hidden = page !== 'Dashboard';
+  otherPage.hidden = page === 'Dashboard';
+  otherTitle.textContent = page;
+  otherDescription.textContent = descriptions[page] || '';
+  document.querySelectorAll('.nav').forEach(button => {
+    button.classList.toggle('active', button.dataset.page === page);
+  });
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+  window.scrollTo(0,0);
+}
+
+document.querySelectorAll('[data-page]').forEach(button => {
+  button.addEventListener('click', () => openPage(button.dataset.page));
+});
+document.querySelectorAll('[data-go]').forEach(button => {
+  button.addEventListener('click', () => openPage(button.dataset.go));
+});
+document.getElementById('backDashboard').addEventListener('click', () => openPage('Dashboard'));
+document.getElementById('menuToggle').addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+});
+</script>
 </body>
 </html>
